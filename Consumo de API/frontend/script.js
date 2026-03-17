@@ -14,23 +14,23 @@ e mostra os dados na tela.
 // ==============================
 
 // pega o elemento <img id="dogImage">
-// será usado para mostrar a foto do cachorro
+// será usado para mostrar a foto do jogo
 const gamImage = document.getElementById("gamImage");
 
-// pega o elemento que mostra o nome da raça
+// pega o elemento que mostra o nome do gênero
 const breedName = document.getElementById("breedName");
 
-// botão que busca um cachorro aleatório
+// botão que busca um jogo aleatório
 const randomBtn = document.getElementById("randomBtn");
 
-// botão que busca cachorro por raça
+// botão que busca jogo por gênero
 const searchBtn = document.getElementById("searchBtn");
 
-// campo de texto onde o usuário digita a raça
+// campo de texto onde o usuário digita o gênero
 const breedInput = document.getElementById("breedInput");
 
-// área onde fica a imagem do cachorro
-// usamos querySelector porque é uma classe (.dog-area)
+// área onde fica a imagem do jogo
+// usamos querySelector porque é uma classe (.gen-area)
 const genArea = document.querySelector(".gen-area");
 
 
@@ -48,7 +48,7 @@ const API = "http://10.106.208.17:3000/api/jogos";
 // FUNÇÃO PRINCIPAL
 // ==============================
 
-// função assíncrona que busca um cachorro na API
+// função assíncrona que busca um jogo na API
 // recebe uma URL como parâmetro
 async function buscarjogo(url) {
 
@@ -80,11 +80,11 @@ async function buscarjogo(url) {
             return;
         }
 
-        // coloca a imagem do cachorro na tela
+        // coloca a imagem do jogo na tela
         // o src define qual imagem será exibida
         gamImage.src = data.message;
 
-        // extrai o nome da raça da URL da imagem
+        // extrai o nome do gênero da URL da imagem
         // exemplo da URL:
         // http://localhost:3000/fotos/husky/1.jpg
 
@@ -92,11 +92,11 @@ async function buscarjogo(url) {
         const partes = data.message.split("/");
 
         // pega a posição 5 do array
-        // que corresponde ao nome da raça
+        // que corresponde ao nome da gênero
         const genero = partes[4];
 
         // coloca a primeira letra maiúscula
-        // ex: husky → Husky
+        // ex: terror → Terror
         breedName.textContent =
             genero.charAt(0).toUpperCase() + genero.slice(1);
 
@@ -156,8 +156,8 @@ function buscarPorgenero() {
         return;
     }
 
-    // chama a API passando a raça na URL
-    // exemplo: /api/cachorros/husky
+    // chama a API passando a gênero na URL
+    // exemplo: /api/jogo/terror
     buscarjogo(`${API}/${genero}`);
 }
 
